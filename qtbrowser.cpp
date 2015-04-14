@@ -31,7 +31,7 @@
 #include <QNetworkAccessManager>
 
 #include <QDesktopWidget>
- 
+
 #include <QWebSettings>
 
 #include <QDesktopServices>
@@ -61,7 +61,7 @@ void help(void) {
     "  --javascript=<on|off>          JavaScript execution (default: on)            \n"
     "  --private-browsing=<on|off>    Private browsing (default: off)               \n"
     "  --spatial-navigation=<on|off>  Spatial Navigation (default: off)             \n"
-    "  --websecurity=<on|off>         WebSecurity (default: off)                    \n"
+    // "  --websecurity=<on|off>         WebSecurity (default: off)                    \n"
     "  --inspector=<port>             Inspector (default: disabled)                 \n"
     "  --max-cached-pages=<n>         Maximum pages in cache (default: 1)           \n"
     "  --pixmap-cache=<n>             Pixmap Cache size in MB (default: 20)         \n"
@@ -75,7 +75,7 @@ void help(void) {
 #endif
 #endif
     "  --validate-ca=<on|off>         Validate Root CA certificates (default: on)   \n"
-    "  --cookie-storage=<path>        Set cookie storage path                       \n"
+    // "  --cookie-storage=<path>        Set cookie storage path                       \n"
     " ------------------------------------------------------------------------------\n"
     " http://www.metrological.com - (c) 2014 Metrological - support@metrological.com\n"
     "");
@@ -84,7 +84,7 @@ void help(void) {
 void print_version() {
   // The BROWSERVERSION information comes from the makefile/git tagging policy
   //  This still needs to be figured out, so for now it is hard-coded
-#define BROWSERVERSION  "2.0.6"  
+#define BROWSERVERSION  "2.0.6"
   printf("Browser version: %s\n\n", BROWSERVERSION);
 }
 
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
     settings->setAttribute(QWebSettings::WebAudioEnabled, true);
     settings->setAttribute(QWebSettings::PluginsEnabled, false);
     settings->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    settings->setAttribute(QWebSettings::WebSecurityEnabled, false);
+    // settings->setAttribute(QWebSettings::WebSecurityEnabled, false);
     settings->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     settings->setAttribute(QWebSettings::LocalStorageEnabled, true);
     settings->enablePersistentStorage(path);
@@ -204,8 +204,8 @@ int main(int argc, char *argv[]) {
             webSettingAttribute(QWebSettings::PrivateBrowsingEnabled, value);
         } else if (strncmp("--spatial-navigation", s, nlen) == 0) {
             webSettingAttribute(QWebSettings::SpatialNavigationEnabled, value);
-        } else if (strncmp("--websecurity", s, nlen) == 0) {
-            webSettingAttribute(QWebSettings::WebSecurityEnabled, value);
+        // } else if (strncmp("--websecurity", s, nlen) == 0) {
+        //     webSettingAttribute(QWebSettings::WebSecurityEnabled, value);
         } else if (strncmp("--inspector", s, nlen) == 0) {
             inspectorPort = (unsigned int)atoi(value);
         } else if (strncmp("--max-cached-pages", s, nlen) == 0) {
@@ -232,11 +232,11 @@ int main(int argc, char *argv[]) {
                 return 0;
             }
 #endif
-        } else if (strncmp("--cookie-storage", s, nlen) == 0) {
-          QString cookiePath(value);
-          // Create persistent cookie-jar, path to the cookie jar is set to the
-          //   default data path unless it was overruled via command-line option
-          settings->enablePersistentCookieStorage(cookiePath);
+        // } else if (strncmp("--cookie-storage", s, nlen) == 0) {
+        //   QString cookiePath(value);
+        //   // Create persistent cookie-jar, path to the cookie jar is set to the
+        //   //   default data path unless it was overruled via command-line option
+        //   settings->enablePersistentCookieStorage(cookiePath);
         }
     }
 
